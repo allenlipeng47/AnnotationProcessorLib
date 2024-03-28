@@ -1,5 +1,6 @@
 package org.example.builder;
 
+//import com.google.auto.service.AutoService;
 import javax.annotation.processing.*;
 import javax.lang.model.*;
 import javax.lang.model.element.*;
@@ -9,6 +10,8 @@ import java.util.*;
 
 @SupportedAnnotationTypes("org.example.builder.Builder")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
+// AutoService helps to remove META-INF/services/javax.annotation.processing.Processor, as well as getting
+// rid of -proc:none in pom.xml
 public class BuilderProcessor extends AbstractProcessor {
 
     @Override
