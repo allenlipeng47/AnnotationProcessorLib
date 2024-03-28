@@ -12,6 +12,8 @@ import java.util.*;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 // AutoService helps to remove META-INF/services/javax.annotation.processing.Processor, as well as getting
 // rid of -proc:none in pom.xml
+//@AutoService(Processor.class)  //can't use autoservice. If generated class doesn't exist, it has "not found"
+// compiling error. With AutoService, it won't be able compile successfully. Needs to use the old way.
 public class BuilderProcessor extends AbstractProcessor {
 
     @Override
