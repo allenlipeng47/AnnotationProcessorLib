@@ -14,34 +14,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.google.auto.service</groupId>-->
-<!--            <artifactId>auto-service</artifactId>-->
-<!--            <version>1.0-rc2</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-    </dependencies>
     <build>
         <plugins>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.1</version>
                 <executions>
+            <!-- proc:none needs to be added to only compile BuilderProcessor.java to bypass not found error -->
                     <execution>
                         <id>default-compile</id>
                         <configuration>
                             <compilerArgument>-proc:none</compilerArgument>
                             <includes>
                                 <include>org/example/builder/BuilderProcessor.java</include>
-                                <!--include dependencies required for LogMeCustomAnnotationProcessor -->
                             </includes>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>compile-project</id>
+                        <id>compile-project-pengli</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>

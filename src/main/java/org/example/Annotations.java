@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.builder.Builder;
+import org.example.builder.MyBuilder;
 
-@Builder(className = {"org.example.MyClass"})
+@MyBuilder(className = {"org.example.MyClass"})
 public class Annotations {
 }

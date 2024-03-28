@@ -8,22 +8,25 @@ import javax.tools.*;
 import java.io.*;
 import java.util.*;
 
-@SupportedAnnotationTypes("org.example.builder.Builder")
+@SupportedAnnotationTypes("org.example.builder.MyBuilder")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 // AutoService helps to remove META-INF/services/javax.annotation.processing.Processor, as well as getting
 // rid of -proc:none in pom.xml
+//@AutoService(Processor.class)  //can't use autoservice. If generated class doesn't exist, it has "not found"
+// compiling error. With AutoService, it won't be able compile successfully. Needs to use the old way.
 public class BuilderProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Builder.class)) {
+        System.out.println("pengli, " + annotations);
+        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(MyBuilder.class)) {
             if (annotatedElement.getKind() != ElementKind.CLASS) {
                 processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Only classes can be annotated with @Builder");
                 return true; // Exit processing
             }
 
             // Get the annotation value
-            String[] fullyClassNames = annotatedElement.getAnnotation(Builder.class).className();
+            String[] fullyClassNames = annotatedElement.getAnnotation(MyBuilder.class).className();
             for (String fullyClassName : fullyClassNames) {
                 String packageName = fullyClassName.substring(0, fullyClassName.lastIndexOf('.'));
                 String className = fullyClassName.substring(fullyClassName.lastIndexOf('.') + 1);
@@ -72,6 +75,7 @@ public class BuilderProcessor extends AbstractProcessor {
             sourceBuilder.append("\t\t\t").append(String.format("return new %s(%s);", className, allFields)).append(
                 "\n");
             sourceBuilder.append("\t\t} ").append("\n");
+
             sourceBuilder.append("\t} ").append("\n");
             sourceBuilder.append("} ").append("\n");
 
