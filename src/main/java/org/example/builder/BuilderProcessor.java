@@ -18,6 +18,7 @@ public class BuilderProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        System.out.println("pengli, " + annotations);
         for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Builder.class)) {
             if (annotatedElement.getKind() != ElementKind.CLASS) {
                 processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Only classes can be annotated with @Builder");
@@ -69,11 +70,11 @@ public class BuilderProcessor extends AbstractProcessor {
                 }
             }
 
-            sourceBuilder.append("\t\t").append(String.format("public %s build() {", className)).append("\n");
-            allFields.deleteCharAt(allFields.length() - 1);
-            sourceBuilder.append("\t\t\t").append(String.format("return new %s(%s);", className, allFields)).append(
-                "\n");
-            sourceBuilder.append("\t\t} ").append("\n");
+//            sourceBuilder.append("\t\t").append(String.format("public %s build() {", className)).append("\n");
+//            allFields.deleteCharAt(allFields.length() - 1);
+//            sourceBuilder.append("\t\t\t").append(String.format("return new %s(%s);", className, allFields)).append(
+//                "\n");
+//            sourceBuilder.append("\t\t} ").append("\n");
             sourceBuilder.append("\t} ").append("\n");
             sourceBuilder.append("} ").append("\n");
 
